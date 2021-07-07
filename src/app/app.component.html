@@ -1,1 +1,19 @@
-<h1> welcome to angular, your data is: {{data}}</h1>
+<h1> welcome to angular, your data is: </h1>
+
+<div *ngFor="let emp of data">
+    
+    <div>
+        {{emp.email}}
+        {{emp.firstName}}
+        {{emp.lastName}}
+    </div>
+
+    <li *ngFor="let add of emp.addresses">
+         {{add.street}} {{add.city}}
+    </li>
+
+    <br>
+
+    <!-- {{emp.email}} -->
+    <hr>
+</div>

@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'myfirstapp';
   query = 'query {firstQuery}'
   private querySubscription!: Subscription;
-  data = ''
+  data:any 
   loading!: boolean;
  
   constructor(private apollo : Apollo){}
@@ -19,11 +19,27 @@ export class AppComponent {
   
   ngOnInit() {
     this.querySubscription = this.apollo.watchQuery<any>({
-      query: gql`query {firstQuery}`
+      query: gql`
+      query{
+        allEmployees{
+          id
+          firstName
+          lastName
+          email
+          addresses {
+            id
+            city
+            street
+          }
+          fullName
+        }
+      }
+      `
     }).valueChanges.subscribe(({data, loading}) => {
       // do stuff here
       this.loading = loading;
-      this.data = data.firstQuery
+      this.data = data.allEmployees
+      console.log(data);
     })
   }
 
